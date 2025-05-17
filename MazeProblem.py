@@ -38,6 +38,36 @@ Good luck!
 
 """
 
+from BreadthFirstSearch_solution import maze_bfs
+
+def solve_maze(maze):
+    if not maze or not maze[0]:
+        return []
+    
+    rows = len(maze)
+    cols = len(maze[0])
+    start = (0, 0)
+    end = (rows - 1, cols - 1)
+    
+    path = maze_bfs(maze, start, end)
+    
+    if not path:
+        return []
+    
+    solution = []
+    for r in range(rows):
+        solution_row = []
+        for c in range(cols):
+            if (r, c) in path:
+                solution_row.append('S')
+            elif maze[r][c] == 1:
+                solution_row.append(1)
+            else:
+                solution_row.append(0)
+        solution.append(solution_row)
+    
+    return solution
+
 if __name__ == '__main__':
     ### Your code must succesfully solve the following mazes:
     
@@ -73,3 +103,7 @@ if __name__ == '__main__':
         [1, 1, 1, 1, 1, 1, 1]
     ]
 
+    print("Solution for maze 'm':")
+    solution = solve_maze(m)
+    for row in solution:
+        print(row)
