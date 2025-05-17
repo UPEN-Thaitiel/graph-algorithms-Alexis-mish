@@ -23,38 +23,38 @@ class MazeNode:
         self.parent = parent
         self.visited = False
 
-def maze_bfs(maze, start, end):
-    rows = len(maze)
-    cols = len(maze[0]) if rows > 0 else 0
+def maze_bfs(maze, start, end): # Es la funcion que se encarga de encontrar el camino más corto en el laberinto
+    rows = len(maze) # Obtenemos el número de filas del laberinto
+    cols = len(maze[0]) if rows > 0 else 0 # Obtenemos el número de columnas del laberinto
     
     if maze[start[0]][start[1]] != 1 or maze[end[0]][end[1]] != 1:
-        return None
+        return None # Si la posición de inicio o fin no es un 1, no hay camino
     
-    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-    queue = deque()
-    start_node = MazeNode(start)
-    queue.append(start_node)
-    visited = [[False for _ in range(cols)] for _ in range(rows)]
-    visited[start[0]][start[1]] = True
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)] # Arriba, abajo, izquierda, derecha
+    queue = deque() # Creamos una cola para BFS
+    start_node = MazeNode(start) # Creamos un nodo para la posición de inicio
+    queue.append(start_node) # Agregamos el nodo a la cola
+    visited = [[False for _ in range(cols)] for _ in range(rows)] # Creamos una matriz para marcar las posiciones visitadas
+    visited[start[0]][start[1]] = True # Marcamos la posición de inicio como visitada
     
-    while queue:
-        current_node = queue.popleft()
-        row, col = current_node.position
+    while queue: 
+        current_node = queue.popleft() # Sacamos el primer nodo de la cola
+        row, col = current_node.position  # Obtenemos la posición del nodo actual
         
-        if (row, col) == end:
-            path = []
-            while current_node:
-                path.append(current_node.position)
-                current_node = current_node.parent
-            return path[::-1]
+        if (row, col) == end: 
+            path = [] # Creamos una lista para almacenar el camino
+            while current_node: 
+                path.append(current_node.position) # Agregamos la posición del nodo actual al camino
+                current_node = current_node.parent # Movemos la posición del nodo actual a su padre
+            return path[::-1]  # Retornamos el camino inverso
         
-        for dr, dc in directions:
-            new_row, new_col = row + dr, col + dc
-            if (0 <= new_row < rows and 0 <= new_col < cols and 
-                maze[new_row][new_col] == 1 and not visited[new_row][new_col]):
-                visited[new_row][new_col] = True
-                new_node = MazeNode((new_row, new_col), current_node)
-                queue.append(new_node)
+        for dr, dc in directions: # Recorremos las posiciones adyacentes
+            new_row, new_col = row + dr, col + dc # Calculamos la posición nueva
+            if (0 <= new_row < rows and 0 <= new_col < cols and  
+                maze[new_row][new_col] == 1 and not visited[new_row][new_col]): # Verificamos si la posición nueva es válida
+                visited[new_row][new_col] = True # Marcamos la posición nueva como visitada
+                new_node = MazeNode((new_row, new_col), current_node) # Creamos un nuevo nodo para la posición nueva
+                queue.append(new_node) # Agregamos el nodo a la cola
     
     return None
 
