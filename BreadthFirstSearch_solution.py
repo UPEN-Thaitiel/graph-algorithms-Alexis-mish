@@ -16,7 +16,7 @@ def breadth_first_search(start_node):
             if not n.visited:
                 queue.append(n)
 
-# Nueva implementación específica para laberintos
+
 class MazeNode:
     def __init__(self, position, parent=None):
         self.position = position  # (row, col)
@@ -59,7 +59,6 @@ def maze_bfs(maze, start, end):
     return None
 
 if __name__ == '__main__':
-    # Ejemplo original de BFS con nodos
     node1 = Node("A")
     node2 = Node("B")
     node3 = Node("C")

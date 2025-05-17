@@ -107,3 +107,18 @@ if __name__ == '__main__':
     solution = solve_maze(m)
     for row in solution:
         print(row)
+
+    print("Solution for maze 'easy_maze':")
+    solution = solve_maze(easy_maze)
+    for row in solution:
+        print(row)
+    
+    print("Solution for maze 'medium maze':")
+    solution = solve_maze(medium_maze)
+    for row in solution:
+        print(row)
+
+    print("Solution for maze 'hard_maze':")
+    solution = solve_maze(hard_maze)
+    for row in solution:
+        print(row)
